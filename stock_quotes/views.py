@@ -9,8 +9,16 @@ import quandl
 # Quandl: CDProject JSON data
 def home(request):
 
+    token = 'MVsz3tSzW19rrW55qTXJ'
+    ticker = 'CDPROJEKT'
+    start_date = '2019-10-08'
+    end_date = '2019-11-08'
 
-    api_request = requests.get('https://www.quandl.com/api/v3/datasets/WSE/CDPROJEKT.json?api_key=MVsz3tSzW19rrW55qTXJ')
+    api_request = requests.get('https://www.quandl.com/api/v3/'
+                               'datasets/WSE/' + ticker + '.json?'
+                               'api_key='      + token + '&'
+                               'start_date='   + start_date + '&'
+                               'end_date='     + end_date)
 
     try:
         api = json.loads(api_request.content)
