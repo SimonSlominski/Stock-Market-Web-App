@@ -12,7 +12,23 @@
     <h1>Hello Simon</h1>
 
     <br><br><br>
-    {{ api }}
+
+
+    {% if api == 'API Error' %}
+        There is a problem with ticket symbol, please try again.
+
+    {% else %}
+
+        {% for key, value in api.items %}
+            {% for inner_key, inner_value in value.items %}
+                {{ inner_key }}: {{ inner_value }} <br/>
+            {% endfor %}
+        {% endfor %}
+
+
+
+    {% endif %}
+
 
 
 
@@ -20,3 +36,4 @@
 </html>
 
 {% endblock %}
+

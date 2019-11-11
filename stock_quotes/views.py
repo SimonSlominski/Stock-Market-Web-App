@@ -11,7 +11,7 @@ def home(request):
 
     token = 'MVsz3tSzW19rrW55qTXJ'
     ticker = 'CDPROJEKT'
-    start_date = '2019-10-08'
+    start_date = '2019-11-08'
     end_date = '2019-11-08'
 
     api_request = requests.get('https://www.quandl.com/api/v3/'
