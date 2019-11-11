@@ -9,23 +9,28 @@ import quandl
 # Quandl: CDProject JSON data
 def home(request):
 
-    token = 'MVsz3tSzW19rrW55qTXJ'
-    ticker = 'CDPROJEKT'
-    start_date = '2019-11-08'
-    end_date = '2019-11-08'
+    if request.method == 'POST':
+        token = 'MVsz3tSzW19rrW55qTXJ'
+        ticker = request.POST['ticker']
+        start_date = '2019-11-01'
+        end_date = '2019-11-08'
 
-    api_request = requests.get('https://www.quandl.com/api/v3/'
-                               'datasets/WSE/' + ticker + '.json?'
-                               'api_key='      + token + '&'
-                               'start_date='   + start_date + '&'
-                               'end_date='     + end_date)
+        api_request = requests.get('https://www.quandl.com/api/v3/'
+                                   'datasets/WSE/' + ticker + '.json?'
+                                   'api_key='      + token + '&'
+                                   'start_date='   + start_date + '&'
+                                   'end_date='     + end_date)
 
-    try:
-        api = json.loads(api_request.content)
-    except Exception as e:
-        api = "API Error"
+        try:
+            api = json.loads(api_request.content)
+        except Exception as e:
+            api = "API Error"
+        return render(request, 'home.html', {'api': api})
 
-    return render(request, 'home.html', {'api': api})
+    else:
+        return render(request, 'home.html', {'ticker': 'Enter company name...'})
+
+
 
 
 # Tiingo: it's working and it's also in JSON. But there is no GPW Data
@@ -67,3 +72,6 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html', {})
+
+def add_stock(request):
+    return render(request, 'add_stock.html', {})
