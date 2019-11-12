@@ -18,13 +18,50 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add Stock</button>
     </form>
 
+    <br/>
+    <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Company name</th>
+          <th scope="col">Date</th>
+          <th scope="col">Open </th>
+          <th scope="col">High</th>
+          <th scope="col">Low</th>
+          <th scope="col">Close</th>
+          <th scope="col">Change (%)</th>
+          <th scope="col">Volume</th>
+          <th scope="col">Trades (#)</th>
+          <th scope="col">Turnover (th)</th>
+          <th scope="col">DELETE</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if ticker %}
 
 
 
-    {% for item in ticker %}
-        {{ item }} <a href="{% url 'delete' item.id %}"> Delete Stock</a> <br/>
-    {% endfor %}
+            {% for list_item in output %}
+                <tr>
+                <th scope="row">{{ list_item.dataset.dataset_code }}</th>
+                <td>{{ list_item.dataset.data.0.0 }}</td>
+                <td>{{ list_item.dataset.data.0.1 }}</td>
+                <td>{{ list_item.dataset.data.0.2 }}</td>
+                <td>{{ list_item.dataset.data.0.3 }}</td>
+                <td>{{ list_item.dataset.data.0.4 }}</td>
+                <td>{{ list_item.dataset.data.0.5 }}</td>
+                <td>{{ list_item.dataset.data.0.6 }}</td>
+                <td>{{ list_item.dataset.data.0.7 }}</td>
+                <td>{{ list_item.dataset.data.0.8 }}</td>
+                <td><a href="/"> Delete Stock</a></td>
+                </tr>
+            {% endfor %}
 
+
+
+
+      {% endif %}
+      </tbody>
+    </table>
 </body>
 </html>
 

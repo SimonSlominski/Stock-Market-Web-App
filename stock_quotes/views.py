@@ -87,7 +87,27 @@ def add_stock(request):
             return redirect('add_stock')
     else:
         ticker = StockTicker.objects.all()
-        return render(request, 'add_stock.html', {'ticker': ticker})
+
+        output = []
+        for ticker_item in ticker:
+            token = 'MVsz3tSzW19rrW55qTXJ'
+
+            start_date = '2019-11-08'
+            end_date = '2019-11-08'
+
+            api_request = requests.get('https://www.quandl.com/api/v3/'
+                                       'datasets/WSE/' + str(ticker_item) + '.json?'                          
+                                       'api_key=' + token + '&'
+                                       'start_date=' + start_date + '&'
+                                       'end_date=' + end_date)
+
+            try:
+                api = json.loads(api_request.content)
+                output.append(api)
+            except Exception as e:
+                api = "API Error"
+
+        return render(request, 'add_stock.html', {'ticker': ticker, 'output': output})
 
 
 def delete(request, stock_id):
