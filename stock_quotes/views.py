@@ -90,7 +90,11 @@ def add_stock(request):
         return render(request, 'add_stock.html', {'ticker': ticker})
 
 
-
+def delete(request, stock_id):
+    item = StockTicker.objects.get(pk=stock_id)
+    item.delete()
+    messages.success(request, (f'Company {item} has been deleted from your portfolio'))
+    return redirect(add_stock)
 
 
 
