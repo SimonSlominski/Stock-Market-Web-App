@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import StockTicker
+from .forms import StockTickerForm
 from datetime import datetime
 import requests
 import json
@@ -73,5 +76,28 @@ def home(request):
 def about(request):
     return render(request, 'about.html', {})
 
+
 def add_stock(request):
-    return render(request, 'add_stock.html', {})
+    if request.method == 'POST':
+        form = StockTickerForm(request.POST or None)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('Stock ticker has been added.'))
+            return redirect('add_stock')
+    else:
+        ticker = StockTicker.objects.all()
+        return render(request, 'add_stock.html', {'ticker': ticker})
+
+
+
+
+
+
+
+
+
+
+
+
+
