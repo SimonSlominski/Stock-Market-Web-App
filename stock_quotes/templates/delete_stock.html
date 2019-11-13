@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Delete Stock</h1>
+    <br>
+
+    {% if ticker %}
+        {% for item in ticker %}
+            {{ item }} <a href="{% url 'delete' item.id %}">Delete Stock</a><br/>
+        {% endfor %}
+    {% else %}
+        You do not have any stocks in Portfolio
+    {% endif %}
+
+</body>
+</html>
+
+{% endblock %}

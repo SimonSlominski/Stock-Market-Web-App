@@ -114,10 +114,12 @@ def delete(request, stock_id):
     item = StockTicker.objects.get(pk=stock_id)
     item.delete()
     messages.success(request, (f'Company {item} has been deleted from your portfolio'))
-    return redirect(add_stock)
+    return redirect(delete_stock)
 
 
-
+def delete_stock(request):
+    ticker = StockTicker.objects.all()
+    return render(request, 'delete_stock.html', {'ticker': ticker})
 
 
 
